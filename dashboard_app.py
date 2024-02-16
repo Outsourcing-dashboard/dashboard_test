@@ -701,7 +701,7 @@ SIDEBAR_STYLE = {
     "top": 0,
     "left": 0,
     "bottom": 0,
-    "width": "16rem",
+    "width": "23.7037vmin",
     "padding": "2rem 1rem",
     "background-color": "#f8f9fa",
     "transform": "scale(0.67)",  # Adjust the scale factor as needed
