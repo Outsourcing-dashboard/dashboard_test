@@ -702,7 +702,7 @@ SIDEBAR_STYLE = {
     "left": 0,
     "bottom": 0,
     "width": "47.4074vmin",
-    "padding": "2rem 1rem",
+    "padding": "5.9259vmin 2.963vmin",
     "background-color": "#f8f9fa",
     "transform": "scale(0.67)",  # Adjust the scale factor as needed
     "transform-origin": "top left",
@@ -713,11 +713,11 @@ SIDEBAR_STYLE = {
 # the styles for the main content position it to the right of the sidebar and
 # add some padding.
 CONTENT_STYLE = {
-    "margin-left": "11rem",
-    "margin-right": "16rem",
+    "margin-left": "32.5926vmin",
+    "margin-right": "47.4074vmin",
     "transform": "scale(0.67)",  # Adjust the scale factor as needed
     "transform-origin": "top left",
-    "padding": "2rem 1rem",
+    "padding": "5.9259vmin 2.963vmin",
     "width": "125%",  # Approximately compensating for 33% scale-down
     "height": "150%",  # Approximately compensating for 33% scale-down
 }
