@@ -1186,7 +1186,7 @@ def update_scatter_plot(selected_county):
     filtered_df = filtered_df.rename(columns={'LA_Name': 'Local Authority', 'year': 'Year', 'percent': 'For-profit placements (%)'})
 
 
-    fig1 = px.scatter(filtered_df, x='year', y='percent', color='percent', trendline='lowess',
+    fig1 = px.scatter(filtered_df, x='Year', y='For-profit placements (%)', color='For-profit placements (%)', trendline='lowess',
                      color_continuous_scale='ylorrd', hover_data=['Local Authority', 'Year', 'For-profit placements (%)'])
     fig1.update_traces(marker=dict(size=5))
     fig1.update_layout(xaxis_title='Year',        yaxis_title='For-profit placements (%)',        title='Percent of children placed with for-profit providers 2011-22',        coloraxis_colorbar=dict(title='For-profit %')    )
@@ -1212,7 +1212,7 @@ def update_scatter_plot(selected_county, selected_expenditure):
                                   (la_df['variable'] == selected_expenditure)]
     filtered_df_spend = filtered_df_spend.rename(columns={'LA_Name': 'Local Authority', 'year': 'Year', 'percent': 'For-profit spend (%)'})
 
-    fig2 = px.scatter(filtered_df_spend, x='year', y='percent', color='percent', trendline='lowess',
+    fig2 = px.scatter(filtered_df_spend, x='Year', y='For-profit spend (%)', color='For-profit spend (%)', trendline='lowess',
                      color_continuous_scale='ylorrd',hover_data=['Local Authority', 'Year', 'For-profit spend (%)'])
     fig2.update_traces(marker=dict(size=5))
     fig2.update_layout(
@@ -1456,7 +1456,7 @@ def update_outcome_plot(selected_county, selected_subcategory, selected_variable
     print(filtered_df_outcome)
     filtered_df_outcome = filtered_df_outcome.rename(columns={'LA_Name': 'Local Authority', 'year': 'Year', 'percent': 'Percent (%)'})
 
-    outcome_plot = px.scatter(filtered_df_outcome, x='year', y='percent', color='percent', trendline='lowess',
+    outcome_plot = px.scatter(filtered_df_outcome, x='Year', y='Percent (%)', color='Percent (%)', trendline='lowess',
                               color_continuous_scale='ylorrd',
                                hover_data=['Local Authority', 'Year', 'Percent (%)'])
     outcome_plot.update_traces(marker=dict(size=5))
@@ -1511,7 +1511,7 @@ def update_outcome_plot(selected_county, selected_subcategory, selected_variable
     #print(filtered_df_placement)
     filtered_df_placement = filtered_df_placement.rename(columns={'LA_Name': 'Local Authority', 'year': 'Year', 'percent': 'Percent (%)'})
 
-    placement_plot = px.scatter(filtered_df_placement, x='year', y='percent', color='percent', trendline='lowess',color_continuous_scale='ylorrd',
+    placement_plot = px.scatter(filtered_df_placement, x='Year', y='Percent (%)', color='Percent (%)', trendline='lowess',color_continuous_scale='ylorrd',
                                hover_data=['Local Authority', 'Year', 'Percent (%)'])
     placement_plot.update_traces(marker=dict(size=5))
     placement_plot.update_layout(
@@ -1594,7 +1594,7 @@ def update_comparison_plot(selected_local_authorities, selected_dataset, selecte
     
     filtered_df = filtered_df.rename(columns={'LA_Name': 'Local Authority', 'year': 'Year', 'percent': 'Percent (%)'})
 
-    fig = px.scatter(filtered_df, x='year', y='percent', color='LA_Name',
+    fig = px.scatter(filtered_df, x='Year', y='Percent (%)', color='LA_Name',
                                hover_data=['Local Authority', 'Year', 'Percent (%)'])
     fig.update_layout(
         xaxis_title='Year',
