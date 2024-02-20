@@ -1032,6 +1032,8 @@ def render_page_2_content(tab):
 def render_page_3_content(tab):
     if tab == 'tab-9':
         return html.Div([
+            html.H1('Compare data for different areas'),
+            html.H3('Click or type for multiple Local Authorities'),
             dcc.Dropdown(
                 id='la-dropdown6',
                 options=[{'label': la, 'value': la} for la in outcomes_df['LA_Name'].unique()],
@@ -1180,7 +1182,7 @@ def update_scatter_plot(selected_county):
         filtered_df = la_df[la_df['variable']=="Private provision"][la_df['LA_Name'] == selected_county]
 
     fig1 = px.scatter(filtered_df, x='year', y='percent', color='percent', trendline='lowess',
-                     color_continuous_scale='ylorrd')
+                     color_continuous_scale='ylorrd', hover_data=['LA_Name', 'year', 'percent'])
     fig1.update_traces(marker=dict(size=5))
     fig1.update_layout(xaxis_title='Year',        yaxis_title='For-profit placements (%)',        title='Percent of children placed with for-profit providers 2011-22',        coloraxis_colorbar=dict(title='For-profit %')    )
     
