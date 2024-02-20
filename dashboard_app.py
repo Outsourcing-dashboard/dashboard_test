@@ -1183,9 +1183,9 @@ def update_scatter_plot(selected_county):
         filtered_df = la_df[la_df['variable']=="Private provision"][la_df['LA_Name'] == selected_county]
 
     fig1 = px.scatter(filtered_df, x='year', y='percent', color='percent', trendline='lowess',
-                     color_continuous_scale='ylorrd', hover_data=['Local Authority': 'LA_Name',
+                     color_continuous_scale='ylorrd', hover_data={'Local Authority': 'LA_Name',
                                                                     'Year': 'year',
-                                                                    'For-profit (%)': 'percent'}])
+                                                                    'For-profit (%)': 'percent'})
     fig1.update_traces(marker=dict(size=5))
     fig1.update_layout(xaxis_title='Year',        yaxis_title='For-profit placements (%)',        title='Percent of children placed with for-profit providers 2011-22',        coloraxis_colorbar=dict(title='For-profit %')    )
     
@@ -1210,9 +1210,9 @@ def update_scatter_plot(selected_county, selected_expenditure):
                                   (la_df['variable'] == selected_expenditure)]
     
     fig2 = px.scatter(filtered_df_spend, x='year', y='percent', color='percent', trendline='lowess',
-                     color_continuous_scale='ylorrd', hover_data=['Local Authority': 'LA_Name',
+                     color_continuous_scale='ylorrd', hover_data={'Local Authority': 'LA_Name',
                                                                     'Year': 'year',
-                                                                    'For-profit (%)': 'percent'}])
+                                                                    'For-profit (%)': 'percent'})
     fig2.update_traces(marker=dict(size=5))
     fig2.update_layout(
         xaxis_title='Year',
@@ -1456,9 +1456,9 @@ def update_outcome_plot(selected_county, selected_subcategory, selected_variable
 
     outcome_plot = px.scatter(filtered_df_outcome, x='year', y='percent', color='percent', trendline='lowess',
                               color_continuous_scale='ylorrd',
-                               hover_data=['Local Authority': 'LA_Name',
+                               hover_data={'Local Authority': 'LA_Name',
                                                               'Year': 'year',
-                                                              'Percent (%)': 'percent'}])
+                                                              'Percent (%)': 'percent'})
     outcome_plot.update_traces(marker=dict(size=5))
     outcome_plot.update_layout(
         xaxis_title='Year',
@@ -1511,9 +1511,9 @@ def update_outcome_plot(selected_county, selected_subcategory, selected_variable
     #print(filtered_df_placement)
 
     placement_plot = px.scatter(filtered_df_placement, x='year', y='percent', color='percent', trendline='lowess',color_continuous_scale='ylorrd',
-                               hover_data=['Local Authority': 'LA_Name',
+                               hover_data={'Local Authority': 'LA_Name',
                                                               'Year': 'year',
-                                                              'Percent (%)': 'percent'}])
+                                                              'Percent (%)': 'percent'})
     placement_plot.update_traces(marker=dict(size=5))
     placement_plot.update_layout(
         xaxis_title='Year',
@@ -1594,9 +1594,9 @@ def update_comparison_plot(selected_local_authorities, selected_dataset, selecte
         }
 
     fig = px.scatter(filtered_df, x='year', y='percent', color='LA_Name',
-                               hover_data=['Local Authority': 'LA_Name',
+                               hover_data={'Local Authority': 'LA_Name',
                                                               'Year': 'year',
-                                                              'Percent (%)': 'percent'}])
+                                                              'Percent (%)': 'percent'})
     fig.update_layout(
         xaxis_title='Year',
         yaxis_title=selected_variable,
