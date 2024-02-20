@@ -765,13 +765,14 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content, watermark])
 def render_page_content(pathname):
     if pathname == "/":
         return html.Div([
-            html.H2("Welcome to the Outsourcing Impacts Tracker Dashboard", className="display-7"),
+            html.H2("Welcome to the Outsourcing Impacts Tracker Dashboard for Children's Social Care", className="display-7"),
             html.Hr(),
             html.H4("Purpose of the Dashboard"),
-            html.P("The Outsourcing Impacts Dashboard aims to provide policymakers with valuable insights into outsourcing levels and their impact on quality of social care services in England. By visualizing outsoucing levels, service quality data, and related information, this dashboard assists policymakers in making informed decisions to address the challenges posed by increasing need for social care."),
+            html.P("The Outsourcing Impacts Dashboard aims to provide policymakers with valuable insights into outsourcing levels and their impact on quality of children's social care services in England. By visualizing outsoucing levels, service quality data, and related information, this dashboard assists policymakers in making informed decisions to address the challenges posed by increasing need for care."),
             html.H4("How to Use"),
             html.P("Navigate through the tabs at the sidebar to access different sections of the dashboard. Each section provides specific information and visualizations related to outsourcing levels and its impacts. Use the interactive components to explore the data and gain insights."),
             html.P("We encourage policymakers to utilize this dashboard as a resource for evidence-based decision-making. By considering the data, visualizations, and resources provided here, policymakers can better understand the magnitude of outsouring and the potential risks associated with it. Additionally, we recommend referring to the 'Links to Resources' section for further in-depth research and reports."),
+            html.P("For now, the dashboard is best viewed on a full computer screen rather than mobile device."),
             html.Hr(),
             html.H4("Important Note"),
             html.P("This dashboard is for informational purposes only and should not be used as the sole basis for policymaking. It is crucial to consult domain experts, conduct further analysis, and consider additional factors when making policy decisions."),
@@ -1182,7 +1183,9 @@ def update_scatter_plot(selected_county):
         filtered_df = la_df[la_df['variable']=="Private provision"][la_df['LA_Name'] == selected_county]
 
     fig1 = px.scatter(filtered_df, x='year', y='percent', color='percent', trendline='lowess',
-                     color_continuous_scale='ylorrd', hover_data=['LA_Name', 'year', 'percent'])
+                     color_continuous_scale='ylorrd', hover_data=['Local Authority': 'LA_Name',
+                                                                    'Year': 'year',
+                                                                    'For-profit (%)': 'percent'}])
     fig1.update_traces(marker=dict(size=5))
     fig1.update_layout(xaxis_title='Year',        yaxis_title='For-profit placements (%)',        title='Percent of children placed with for-profit providers 2011-22',        coloraxis_colorbar=dict(title='For-profit %')    )
     
@@ -1207,7 +1210,9 @@ def update_scatter_plot(selected_county, selected_expenditure):
                                   (la_df['variable'] == selected_expenditure)]
     
     fig2 = px.scatter(filtered_df_spend, x='year', y='percent', color='percent', trendline='lowess',
-                     color_continuous_scale='ylorrd')
+                     color_continuous_scale='ylorrd', hover_data=['Local Authority': 'LA_Name',
+                                                                    'Year': 'year',
+                                                                    'For-profit (%)': 'percent'}])
     fig2.update_traces(marker=dict(size=5))
     fig2.update_layout(
         xaxis_title='Year',
@@ -1283,7 +1288,7 @@ def update_plot(selected_exits_entries, selected_local_authority, selected_homes
     fig.update_layout(
         xaxis_title='Year',
         yaxis_title='Number',
-        title='Childrens home entries or exits'
+        title=f'Childrens home {selected_exits_entries}'
     )
     
     return fig
@@ -1449,7 +1454,11 @@ def update_outcome_plot(selected_county, selected_subcategory, selected_variable
     print("Filtered Data:")
     print(filtered_df_outcome)
 
-    outcome_plot = px.scatter(filtered_df_outcome, x='year', y='percent', color='percent', trendline='lowess',color_continuous_scale='ylorrd')
+    outcome_plot = px.scatter(filtered_df_outcome, x='year', y='percent', color='percent', trendline='lowess',
+                              color_continuous_scale='ylorrd',
+                               hover_data=['Local Authority': 'LA_Name',
+                                                              'Year': 'year',
+                                                              'Percent (%)': 'percent'}])
     outcome_plot.update_traces(marker=dict(size=5))
     outcome_plot.update_layout(
         xaxis_title='Year',
@@ -1501,7 +1510,10 @@ def update_outcome_plot(selected_county, selected_subcategory, selected_variable
     #print("Filtered Data:")
     #print(filtered_df_placement)
 
-    placement_plot = px.scatter(filtered_df_placement, x='year', y='percent', color='percent', trendline='lowess',color_continuous_scale='ylorrd')
+    placement_plot = px.scatter(filtered_df_placement, x='year', y='percent', color='percent', trendline='lowess',color_continuous_scale='ylorrd',
+                               hover_data=['Local Authority': 'LA_Name',
+                                                              'Year': 'year',
+                                                              'Percent (%)': 'percent'}])
     placement_plot.update_traces(marker=dict(size=5))
     placement_plot.update_layout(
         xaxis_title='Year',
@@ -1581,7 +1593,10 @@ def update_comparison_plot(selected_local_authorities, selected_dataset, selecte
             'data': []
         }
 
-    fig = px.scatter(filtered_df, x='year', y='percent', color='LA_Name')
+    fig = px.scatter(filtered_df, x='year', y='percent', color='LA_Name',
+                               hover_data=['Local Authority': 'LA_Name',
+                                                              'Year': 'year',
+                                                              'Percent (%)': 'percent'}])
     fig.update_layout(
         xaxis_title='Year',
         yaxis_title=selected_variable,
