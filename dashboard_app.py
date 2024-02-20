@@ -1594,7 +1594,7 @@ def update_comparison_plot(selected_local_authorities, selected_dataset, selecte
     
     filtered_df = filtered_df.rename(columns={'LA_Name': 'Local Authority', 'year': 'Year', 'percent': 'Percent (%)'})
 
-    fig = px.scatter(filtered_df, x='Year', y='Percent (%)', color='LA_Name',
+    fig = px.scatter(filtered_df, x='Year', y='Percent (%)', color='Local Authority',
                                hover_data=['Local Authority', 'Year', 'Percent (%)'])
     fig.update_layout(
         xaxis_title='Year',
@@ -1604,7 +1604,7 @@ def update_comparison_plot(selected_local_authorities, selected_dataset, selecte
 
         # Add a line trace to the plot
     for la in selected_local_authorities:
-        line_data = filtered_df[filtered_df['LA_Name'] == la].sort_values(by='year')
+        line_data = filtered_df[filtered_df['Local Authority'] == la].sort_values(by='year')
         fig.add_trace(go.Scatter(x=line_data['year'], y=line_data['percent'], mode='lines', name=la))
 
     return fig
