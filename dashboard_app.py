@@ -671,29 +671,26 @@ from dash.exceptions import PreventUpdate
 
 
 
-app = dash.Dash(external_stylesheets=[dbc.themes.LUX],
-    meta_tags=[
-        {"name": "viewport", "content": "width=device-width, initial-scale=1"}
-    ],)
+app = dash.Dash(external_stylesheets=[dbc.themes.LUX])
 
 
 server = app.server
 
 tabs_styles = {
-    'height': '4.0741vmin'
+    'height': '44px'
 }
 tab_style = {
-    'borderBottom': '0.0926vmin solid #d6d6d6',
-    'padding': '0.5556vmin',
+    'borderBottom': '1px solid #d6d6d6',
+    'padding': '6px',
     'fontWeight': 'bold'
 }
 
 tab_selected_style = {
-    'borderTop': '0.0926vmin solid #d6d6d6',
-    'borderBottom': '0.0926vmin solid #d6d6d6',
+    'borderTop': '1px solid #d6d6d6',
+    'borderBottom': '1px solid #d6d6d6',
     'backgroundColor': '#119DFF',
     'color': 'white',
-    'padding': '0.5556vmin'
+    'padding': '6px'
 }
 
 SIDEBAR_STYLE = {
@@ -701,8 +698,8 @@ SIDEBAR_STYLE = {
     "top": 0,
     "left": 0,
     "bottom": 0,
-    "width": "47.4074vmin",
-    "padding": "5.9259vmin 2.963vmin",
+    "width": "16rem",
+    "padding": "2rem 1rem",
     "background-color": "#f8f9fa",
     "transform": "scale(0.67)",  # Adjust the scale factor as needed
     "transform-origin": "top left",
@@ -713,11 +710,11 @@ SIDEBAR_STYLE = {
 # the styles for the main content position it to the right of the sidebar and
 # add some padding.
 CONTENT_STYLE = {
-    "margin-left": "32.5926vmin",
-    "margin-right": "47.4074vmin",
+    "margin-left": "11rem",
+    "margin-right": "16rem",
     "transform": "scale(0.67)",  # Adjust the scale factor as needed
     "transform-origin": "top left",
-    "padding": "5.9259vmin 2.963vmin",
+    "padding": "2rem 1rem",
     "width": "125%",  # Approximately compensating for 33% scale-down
     "height": "150%",  # Approximately compensating for 33% scale-down
 }
@@ -747,9 +744,22 @@ sidebar = html.Div(
 content = html.Div(id="page-content", style=CONTENT_STYLE)
 
 
+watermark = html.Div(
+    "Under-development; Not for dissemination",
+    style={
+        "position": "fixed",
+        "bottom": "50%",  # Adjust the vertical position
+        "right": "50%",   # Adjust the horizontal position
+        "transform": "translate(50%, 50%) rotate(-45deg)",  # Rotate and position
+        "color": "rgba(255, 0, 0, 0.4)",
+        "fontSize": "70px",  # Increase the font size for better visibility
+        "zIndex": "9999",
+    }
+)
+
 
 # Incorporate the watermark into your layout
-app.layout = html.Div([dcc.Location(id="url"), sidebar, content])
+app.layout = html.Div([dcc.Location(id="url"), sidebar, content, watermark])
 
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def render_page_content(pathname):
@@ -779,7 +789,7 @@ def render_page_content(pathname):
             ),
             html.Hr(),
             html.Li([
-                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/Master-RGB-DarkGreen.png?raw=true", style={"width": "13.8889vmin", "height": "9.2593vmin"}),
+                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/Master-RGB-DarkGreen.png?raw=true", style={"width": "150px", "height": "100px"}),
                     html.Div([
                         html.H4("Acknowledgements"),
                         html.P("The Nuffield Foundation is an independent charitable trust with a mission to advance social well-being. It funds research that informs social policy, primarily in Education, Welfare, and Justice. The Nuffield Foundation is the founder and co-funder of the Nuffield Council on Bioethics, the Ada Lovelace Institute and the Nuffield Family Justice Observatory. The Foundation has funded this project, but the views expressed are those of the authors and not necessarily the Foundation. Website: www.nuffieldfoundation.org Twitter: @NuffieldFound"),
@@ -864,7 +874,7 @@ def render_page_1_content(tab):
                      ],
                 value=None,
                 placeholder='All Local Authorities',
-                style={'width': '55.5556vmin', 'margin-bottom': '1.8519vmin'}
+                style={'width': '600px', 'margin-bottom': '20px'}
             ),
             html.H3("Select an area of expenditure"),
             dcc.Dropdown(
@@ -874,7 +884,7 @@ def render_page_1_content(tab):
                      ],
                 value='Total Children Looked After',
                 placeholder='Select an area of expenditure',
-                style={'width': '55.5556vmin', 'margin-bottom': '1.8519vmin'}
+                style={'width': '600px', 'margin-bottom': '20px'}
             ),
             dcc.Graph(
                 id='scatter-plot2'
@@ -942,7 +952,7 @@ def render_page_1_content(tab):
               ],
               value=merged2['variable'].unique()[2]
             ),
-            dcc.Graph(id='outsourcing-map',style={'height': '92.5926vmin'})])
+            dcc.Graph(id='outsourcing-map',style={'height': '1000px'})])
 
 @app.callback(Output('page-2-tabs-content', 'children'), [Input('page-2-tabs', 'value')])
 def render_page_2_content(tab):
@@ -959,7 +969,7 @@ def render_page_2_content(tab):
                 placeholder='Select an inspection domain'
             ),
             html.Hr(),
-            dcc.Graph(id='ofsted-plot',style={'height': '74.0741vmin'})
+            dcc.Graph(id='ofsted-plot',style={'height': '800px'})
         ])
     elif tab == 'tab-7':
         return html.Div([
@@ -1099,7 +1109,7 @@ def render_page_4_content(tab):
             html.H3("Meet the team:"),
             html.Ul([
                 html.Li([
-                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/anders_bach-mortensen.jpg?raw=true", style={"width": "9.2593vmin", "height": "9.2593vmin"}),
+                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/anders_bach-mortensen.jpg?raw=true", style={"width": "100px", "height": "100px"}),
                     html.Div([
                         html.H4("Anders"),
                         html.P("Anders is a social scientist with expertise on outsourcing, social care services and systematic review methods."),
@@ -1107,7 +1117,7 @@ def render_page_4_content(tab):
                     ], style={"display": "inline-block", "vertical-align": "top"})
                 ]),
                 html.Li([
-                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/Michelle.jpg?raw=true", style={"width": "9.2593vmin", "height": "9.2593vmin"}),
+                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/Michelle.jpg?raw=true", style={"width": "100px", "height": "100px"}),
                     html.Div([
                         html.H4("Michelle"),
                         html.P("Michelle is a Research Assistant Professor with the U-M Institute for Firearm Injury Prevention."),
@@ -1115,7 +1125,7 @@ def render_page_4_content(tab):
                     ], style={"display": "inline-block", "vertical-align": "top"})
                 ]),               
                 html.Li([
-                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/christine.jpg?raw=true", style={"width": "9.2593vmin", "height": "9.2593vmin"}),
+                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/christine.jpg?raw=true", style={"width": "100px", "height": "100px"}),
                     html.Div([
                         html.H4("Christine"),
                         html.P("Christine is a political economist who specialises in postgrowth economics and the privatisation of social care."),
@@ -1123,7 +1133,7 @@ def render_page_4_content(tab):
                     ], style={"display": "inline-block", "vertical-align": "top"})
                 ]),
                 html.Li([
-                    html.Img(src="https://github.com/BenGoodair/Methane_Dashboard/blob/main/ben.jpg?raw=true", style={"width": "9.2593vmin", "height": "9.2593vmin"}),
+                    html.Img(src="https://github.com/BenGoodair/Methane_Dashboard/blob/main/ben.jpg?raw=true", style={"width": "100px", "height": "100px"}),
                     html.Div([
                         html.H4("Ben"),
                         html.P("Ben is a social researcher identifying the impacts of privatization on health and social care systems."),
@@ -1131,7 +1141,7 @@ def render_page_4_content(tab):
                     ], style={"display": "inline-block", "vertical-align": "top"})
                 ]),
                 html.Li([
-                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/jane.png?raw=true", style={"width": "9.2593vmin", "height": "9.2593vmin"}),
+                    html.Img(src="https://github.com/BenGoodair/Outsourcing_Impact_Dashboard/blob/main/Images/jane.png?raw=true", style={"width": "100px", "height": "100px"}),
                     html.Div([
                         html.H4("Jane"),
                         html.P("Jane is Professor of Evidence Based Intervention and Policy Evaluation at the Department of Social Policy and Intervention, University of Oxford."),
