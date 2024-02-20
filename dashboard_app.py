@@ -765,7 +765,7 @@ app.layout = html.Div([dcc.Location(id="url"), sidebar, content, watermark])
 def render_page_content(pathname):
     if pathname == "/":
         return html.Div([
-            html.H2("Welcome to the Outsourcing Impacts Tracker Dashboard for Children's Social Care", className="display-7"),
+            html.H2("The Outsourcing Impacts Tracker Dashboard for Children's Social Care", className="display-7"),
             html.Hr(),
             html.H4("Purpose of the Dashboard"),
             html.P("The Outsourcing Impacts Dashboard aims to provide policymakers with valuable insights into outsourcing levels and their impact on quality of children's social care services in England. By visualizing outsoucing levels, service quality data, and related information, this dashboard assists policymakers in making informed decisions to address the challenges posed by increasing need for care."),
@@ -1604,8 +1604,8 @@ def update_comparison_plot(selected_local_authorities, selected_dataset, selecte
 
         # Add a line trace to the plot
     for la in selected_local_authorities:
-        line_data = filtered_df[filtered_df['Local Authority'] == la].sort_values(by='year')
-        fig.add_trace(go.Scatter(x=line_data['year'], y=line_data['percent'], mode='lines', name=la))
+        line_data = filtered_df[filtered_df['Local Authority'] == la].sort_values(by='Year')
+        fig.add_trace(go.Scatter(x=line_data['Year'], y=line_data['Percent (%)'], mode='lines', name=la))
 
     return fig
 
